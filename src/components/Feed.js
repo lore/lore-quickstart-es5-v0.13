@@ -1,6 +1,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import InfiniteScrollingList from './InfiniteScrollingList';
 import Tweet from './Tweet';
 
@@ -53,6 +54,18 @@ export default createReactClass({
                 page: lastPageNumber + 1
               }
             }, lastPage.query));
+          }}
+          selectOther={(getState) => {
+            return getState('tweet.all', {
+              where: function(tweet) {
+                const isReal = tweet.id;
+                const isNew = moment(tweet.data.createdAt).diff(timestamp) > 0;
+                return isReal && isNew;
+              },
+              sortBy: function(model) {
+                return -moment(model.data.createdAt).unix();
+              }
+            });
           }}
         />
       </div>
