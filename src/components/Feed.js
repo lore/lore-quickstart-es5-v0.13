@@ -25,6 +25,32 @@ createReactClass({
     tweets: PropTypes.object.isRequired
   },
 
+  getInitialState() {
+    const { tweets } = this.props;
+
+    return {
+      tweets: tweets,
+      nextTweets: tweets
+    };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    const nextTweets = nextProps.tweets;
+
+    if (nextTweets.state === PayloadStates.FETCHING) {
+      this.setState({
+        nextTweets: nextTweets,
+        isFetching: true
+      });
+    } else {
+      this.setState({
+        tweets: nextTweets,
+        nextTweets: nextTweets,
+        isFetching: false
+      });
+    }
+  },
+
   renderTweet(tweet) {
     return (
       <Tweet key={tweet.id} tweet={tweet} />
@@ -42,8 +68,8 @@ createReactClass({
   },
 
   render() {
-    const { tweets } = this.props;
-    const currentPage = tweets.query.pagination.page;
+    const { tweets, nextTweets } = this.state;
+    const currentPage = nextTweets.query.pagination.page;
     const paginationLinks = [];
 
     if (tweets.state === PayloadStates.FETCHING) {
@@ -57,6 +83,9 @@ createReactClass({
       );
     }
 
+    // check if we're fetching the next page of tweets
+    const isFetchingNextTweets = nextTweets.state === PayloadStates.FETCHING;
+
     // calculate the number of pagination links from our metadata, then
     // generate an array of pagination links
     const numberOfPages = Math.ceil(tweets.meta.totalCount / tweets.meta.perPage);
@@ -69,7 +98,7 @@ createReactClass({
         <h2 className="title">
           Feed
         </h2>
-        <ul className="media-list tweets">
+        <ul className={`media-list tweets ${isFetchingNextTweets ? 'transition' : ''}`}>
           {tweets.data.map(this.renderTweet)}
         </ul>
         <nav>
