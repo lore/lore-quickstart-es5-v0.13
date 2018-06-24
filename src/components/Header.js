@@ -2,6 +2,7 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import CreateButton from './CreateButton';
 
 export default createReactClass({
   displayName: 'Header',
@@ -15,8 +16,10 @@ export default createReactClass({
               Lore Quickstart
             </Link>
           </div>
+          <CreateButton/>
         </div>
       </nav>
     );
   }
+
 });
