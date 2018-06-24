@@ -1,6 +1,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
+import Tweet from './Tweet';
 
 export default createReactClass({
   displayName: 'Feed',
@@ -32,9 +33,7 @@ export default createReactClass({
 
   renderTweet(tweet) {
     return (
-      <li key={tweet.id}>
-        {tweet.data.text}
-      </li>
+      <Tweet key={tweet.id} tweet={tweet} />
     );
   },
 
