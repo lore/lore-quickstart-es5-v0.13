@@ -1,9 +1,15 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
+import { connect } from 'lore-hook-connect';
 import Tweet from './Tweet';
 
-export default createReactClass({
+export default connect(function(getState, props) {
+  return {
+    tweets: getState('tweet.find')
+  };
+})(
+createReactClass({
   displayName: 'Feed',
 
   propTypes: {
@@ -52,4 +58,5 @@ export default createReactClass({
     );
   }
 
-});
+})
+);
