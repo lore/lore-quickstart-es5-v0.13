@@ -5,11 +5,11 @@ import moment from 'moment';
 import { connect } from 'lore-hook-connect';
 
 export default connect(function(getState, props) {
-  const { tweet } = props;
+  const tweet = props.tweet;
 
   return {
     user: getState('user.byId', {
-      id: tweet.data.userId
+      id: tweet.data.user
     })
   };
 })(
