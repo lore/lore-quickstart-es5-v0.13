@@ -2,6 +2,8 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import _ from 'lodash';
+import PayloadStates from '../constants/PayloadStates';
 import InfiniteScrollingList from './InfiniteScrollingList';
 import Tweet from './Tweet';
 
@@ -35,6 +37,9 @@ export default createReactClass({
               pagination: {
                 sort: 'createdAt DESC',
                 page: 1
+              },
+              exclude: function(tweet) {
+                return tweet.state === PayloadStates.DELETED;
               }
             });
           }}
@@ -44,7 +49,11 @@ export default createReactClass({
             );
           }}
           refresh={(page, getState) => {
-            return getState('tweet.find', page.query);
+            return getState('tweet.find', _.defaultsDeep({
+              exclude: function(tweet) {
+                return tweet.state === PayloadStates.DELETED;
+              }
+            }, page.query));
           }}
           selectNextPage={(lastPage, getState) => {
             const lastPageNumber = lastPage.query.pagination.page;
@@ -52,6 +61,9 @@ export default createReactClass({
             return getState('tweet.find', _.defaultsDeep({
               pagination: {
                 page: lastPageNumber + 1
+              },
+              exclude: function(tweet) {
+                return tweet.state === PayloadStates.DELETED;
               }
             }, lastPage.query));
           }}
@@ -64,6 +76,9 @@ export default createReactClass({
               },
               sortBy: function(model) {
                 return -moment(model.data.createdAt).unix();
+              },
+              exclude: function(tweet) {
+                return tweet.state === PayloadStates.DELETED;
               }
             });
           }}
