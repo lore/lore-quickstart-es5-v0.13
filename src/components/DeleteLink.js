@@ -1,9 +1,8 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import UserCanDeleteTweet from '../decorators/UserCanDeleteTweet';
 
-export default UserCanDeleteTweet(createReactClass({
+export default createReactClass({
   displayName: 'DeleteLink',
 
   propTypes: {
@@ -31,4 +30,4 @@ export default UserCanDeleteTweet(createReactClass({
     );
   }
 
-}));
+});

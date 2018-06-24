@@ -1,9 +1,8 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import UserCanEditTweet from '../decorators/UserCanEditTweet';
 
-export default UserCanEditTweet(createReactClass({
+export default createReactClass({
   displayName: 'EditLink',
 
   propTypes: {
@@ -31,4 +30,4 @@ export default UserCanEditTweet(createReactClass({
     );
   }
 
-}));
+});
