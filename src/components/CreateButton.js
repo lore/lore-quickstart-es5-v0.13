@@ -8,9 +8,12 @@ export default createReactClass({
 
   onClick() {
     lore.dialog.show(function() {
-      return (
-        <CreateTweetDialog />
-      );
+      return lore.dialogs.tweet.create({
+        blueprint: 'optimistic',
+        request: function(data) {
+          return lore.actions.tweet.create(data).payload;
+        }
+      });
     });
   },
 
