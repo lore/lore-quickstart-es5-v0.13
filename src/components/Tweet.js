@@ -3,9 +3,10 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'lore-hook-connect';
+import EditLink from './EditLink';
 
 export default connect(function(getState, props) {
-  const tweet = props.tweet;
+  const { tweet } = props;
 
   return {
     user: getState('user.byId', {
@@ -42,6 +43,9 @@ createReactClass({
           <p className="list-group-item-text text">
             {tweet.data.text}
           </p>
+          <div className="tweet-actions">
+            <EditLink tweet={tweet} />
+          </div>
         </div>
       </li>
     );
