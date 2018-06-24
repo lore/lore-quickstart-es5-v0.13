@@ -1,8 +1,8 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import _ from 'lodash';
+import moment from 'moment';
 import PayloadStates from '../constants/PayloadStates';
 import InfiniteScrollingList from './InfiniteScrollingList';
 import Tweet from './Tweet';
@@ -36,7 +36,8 @@ export default createReactClass({
               },
               pagination: {
                 sort: 'createdAt DESC',
-                page: 1
+                page: 1,
+                populate: 'user'
               },
               exclude: function(tweet) {
                 return tweet.state === PayloadStates.DELETED;
