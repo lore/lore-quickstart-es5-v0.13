@@ -6,7 +6,11 @@ export default createReactClass({
   displayName: 'CreateButton',
 
   onClick() {
-    console.log('Create tweet!');
+    lore.dialog.show(function() {
+      return (
+        <h1>Dialog Placeholder</h1>
+      );
+    });
   },
 
   render() {
