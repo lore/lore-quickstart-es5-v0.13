@@ -7,7 +7,15 @@ import Tweet from './Tweet';
 export default createReactClass({
   displayName: 'Feed',
 
+  getInitialState() {
+    return {
+      timestamp: new Date().toISOString()
+    };
+  },
+
   render() {
+    const { timestamp } = this.state;
+
     return (
       <div className="feed">
         <h2 className="title">
@@ -16,6 +24,13 @@ export default createReactClass({
         <InfiniteScrollingList
           select={(getState) => {
             return getState('tweet.find', {
+              where: {
+                where: {
+                  createdAt: {
+                    '<=': timestamp
+                  }
+                }
+              },
               pagination: {
                 sort: 'createdAt DESC',
                 page: 1
