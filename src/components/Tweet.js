@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'lore-hook-connect';
 import EditLink from './EditLink';
+import DeleteLink from './DeleteLink';
 
 export default connect(function(getState, props) {
   const { tweet } = props;
@@ -45,6 +46,7 @@ createReactClass({
           </p>
           <div className="tweet-actions">
             <EditLink tweet={tweet} />
+            <DeleteLink tweet={tweet} />
           </div>
         </div>
       </li>
