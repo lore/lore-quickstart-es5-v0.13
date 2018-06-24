@@ -1,6 +1,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 
 export default createReactClass({
   displayName: 'Profile',
@@ -41,9 +42,9 @@ export default createReactClass({
               <li>Delete your own tweets</li>
             </ul>
           </div>
-          <button className="btn btn-primary">
+          <Link className="btn btn-primary" to="/logout">
             Log out
-          </button>
+          </Link>
         </div>
       </div>
     );
