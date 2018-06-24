@@ -19,45 +19,38 @@ import '../../assets/css/main.css';
 
 export default connect(function(getState, props) {
   return {
-    // user: getState('currentUser')
+    user: getState('currentUser')
   };
 }, { subscribe: true })(
 createReactClass({
   displayName: 'Master',
 
-  // propTypes: {
-  //   user: PropTypes.object.isRequired
-  // },
+  propTypes: {
+    user: PropTypes.object.isRequired
+  },
 
-  // childContextTypes: {
-  //   user: PropTypes.object
-  // },
+  childContextTypes: {
+    user: PropTypes.object
+  },
 
-  // getChildContext() {
-  //   return {
-  //     user: this.props.user
-  //   };
-  // },
-
-  componentDidMount() {
-    // If you want to play with the router through the browser's dev console then
-    // uncomment out this line. React Router automatically provides 'router'
-    // to any components that are "routes" (such as Master and Layout), so this
-    // is a good location to attach it to the global lore object.
-
-    // lore.router = this.props.router;
+  getChildContext() {
+    return {
+      user: this.props.user
+    };
   },
 
   render() {
-    // const { user } = this.props;
+    const { user } = this.props;
 
-    // if (user.state === PayloadStates.FETCHING) {
-    //   return null;
-    // }
+    if (user.state === PayloadStates.FETCHING) {
+      return (
+        <div className="loader" />
+      );
+    }
 
     return (
       <div>
-        <RemoveLoadingScreen/>
+        <RemoveLoadingScreen />
         {React.cloneElement(this.props.children)}
       </div>
     );
