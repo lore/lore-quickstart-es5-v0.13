@@ -1,6 +1,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
+import CreateTweetDialog from './CreateTweetDialog';
 
 export default createReactClass({
   displayName: 'CreateButton',
@@ -8,7 +9,7 @@ export default createReactClass({
   onClick() {
     lore.dialog.show(function() {
       return (
-        <h1>Dialog Placeholder</h1>
+        <CreateTweetDialog />
       );
     });
   },
