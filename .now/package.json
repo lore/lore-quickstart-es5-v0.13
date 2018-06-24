@@ -1,0 +1,9 @@
+{
+  "name": "lore-quickstart-es5-v0.13",
+  "scripts": {
+    "start": "serve . --single"
+  },
+  "dependencies": {
+    "serve": "latest"
+  }
+}
