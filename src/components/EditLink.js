@@ -16,7 +16,7 @@ export default createReactClass({
       return lore.dialogs.tweet.update(tweet, {
         blueprint: 'optimistic',
         request: function(data) {
-          return lore.actions.tweet.update(tweet, data);
+          return lore.actions.tweet.update(tweet, data).payload;
         }
       });
     });
