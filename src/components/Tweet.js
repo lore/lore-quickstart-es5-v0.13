@@ -2,26 +2,23 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { connect } from 'lore-hook-connect';
 
-export default createReactClass({
+export default connect(function(getState, props) {
+  const { tweet } = props;
+
+  return {
+    user: getState('user.byId', {
+      id: tweet.data.userId
+    })
+  };
+})(
+createReactClass({
   displayName: 'Tweet',
 
   propTypes: {
     tweet: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
-  },
-
-  getDefaultProps() {
-    return {
-      user: {
-        id: 1,
-        data: {
-          id: 1,
-          nickname: "lucca",
-          avatar: "https://cloud.githubusercontent.com/assets/2637399/19027072/a36f0c7a-88e1-11e6-931e-7f67fe01367b.png"
-        }
-      }
-    };
   },
 
   render() {
@@ -50,4 +47,5 @@ export default createReactClass({
     );
   }
 
-});
+})
+);
